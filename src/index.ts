@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import sequelize from './config/database';
 import courseRoutes from './routes/course.routes';
 import moduleRoutes from './routes/module.routes';
+import contentRoutes from './routes/content.routes';
 
  
 dotenv.config();
@@ -18,6 +19,7 @@ app.get('/', (_req, res) => {
  
 app.use('/courses', courseRoutes);
 app.use('/modules', moduleRoutes);
+app.use('/contents', contentRoutes);
  
 const PORT = process.env.PORT || 3000;
  
