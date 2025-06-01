@@ -9,7 +9,18 @@ export class ModuleController {
  
     async create(req: Request, res: Response): Promise<Response> {
         try {
-            const data: CreateModuleDTO = req.body;
+            const { title, description, courseId, userId } = req.body;
+
+            if (!title || !courseId || !userId) {
+                return res.status(400).json({ error: 'title, courseId, and userId are required' });
+            }
+
+            const data: CreateModuleDTO = {
+                title,
+                description,
+                courseId,
+                userId,
+            };
             const module = await this.moduleService.createModule(data);
             return res.status(201).json(module);
         } catch (error: any) {

@@ -10,6 +10,7 @@ import {
 } from 'sequelize-typescript';
 import { v4 as uuidv4 } from 'uuid';
 import { Course } from './Course';
+import { User } from './User';
  
 @Table({
     tableName: 'modules',
@@ -39,4 +40,14 @@ export class Module extends Model<Module> {
  
     @Column(DataType.TEXT)
     description?: string;
+
+    @ForeignKey(() => User)
+    @Column({
+        type: DataType.INTEGER,
+        allowNull: false,
+    })
+    userId!: number;
+
+    @BelongsTo(() => User)
+    user!: User;
 }

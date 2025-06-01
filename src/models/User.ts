@@ -5,6 +5,8 @@ import {
     PrimaryKey,
     Default,
     DataType,
+     CreatedAt,
+    UpdatedAt,
 } from 'sequelize-typescript';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -37,4 +39,12 @@ export class User extends Model<User> {
         defaultValue: 'active',
     })
     status!: string;
+
+      @CreatedAt
+    @Column({ field: 'created_at' }) 
+    createdAt!: Date;
+
+    @UpdatedAt
+    @Column({ field: 'updated_at' })
+    updatedAt!: Date;
 }

@@ -7,21 +7,23 @@ import { ListCoursesDTO } from '../dtos/course/ListCoursesDTO';
 export class CourseController {
     private courseService = new CourseService();
  
-    async create(req: Request, res: Response): Promise<Response> {
+     async create(req: Request, res: Response): Promise<Response> {
         try {
-            const data: CreateCourseDTO = req.body;
+            const { title, description, userId, uniqueCode } = req.body;
+
+            if (!title || !userId || !uniqueCode) {
+                return res.status(400).json({ error: 'title, userId, and uniqueCode are required' });
+            }
+
+            const data: CreateCourseDTO = {
+                title,
+                description,
+                userId,
+                uniqueCode,
+            };
+
             const course = await this.courseService.createCourse(data);
             return res.status(201).json(course);
-        } catch (error: any) {
-            return res.status(400).json({ error: error.message });
-        }
-    }
- 
-    async getById(req: Request, res: Response): Promise<Response> {
-        try {
-            const course = await this.courseService.getCourseById(req.params.id);
-            if (!course) return res.status(404).json({ message: 'Course not found' });
-            return res.json(course);
         } catch (error: any) {
             return res.status(400).json({ error: error.message });
         }

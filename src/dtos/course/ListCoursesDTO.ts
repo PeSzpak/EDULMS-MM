@@ -3,4 +3,5 @@ export interface ListCoursesDTO {
     uniqueCode?: string;
     page?: number;
     limit?: number;
+    userId?: number;
 }

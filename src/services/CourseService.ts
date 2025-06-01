@@ -30,6 +30,10 @@ export class CourseService {
         if (filters?.uniqueCode) {
             where.uniqueCode = filters.uniqueCode;
         }
+
+          if (filters?.userId) {
+            where.userId = filters.userId;
+        }
        
         return Course.findAll({ where });
     }

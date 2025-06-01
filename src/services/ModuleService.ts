@@ -30,6 +30,10 @@ export class ModuleService {
         if (filters?.title) {
             where.title = { [Op.iLike]: `%${filters.title}%` };
         }
+
+         if (filters?.userId) {
+            where.userId = filters.userId;
+        }
  
         return this.moduleRepository.findAll(where);
     }
